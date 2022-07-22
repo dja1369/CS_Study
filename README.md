@@ -359,6 +359,30 @@
 	JOIN
 ![image](https://user-images.githubusercontent.com/62789342/180370740-f77ae906-4da3-41eb-b553-90d47fc75ae1.png)
 
+	## basic syntax
+	SELECT : 데이블 컬럼 조건
+	- AS : 특정 컬럼의 데이터를 표시하되 표시할 컬럼명을 변경 
+
+	USE : e.g USE DBNAME; (DB선택)
+
+	FROM : 테이블 명 조건
+
+	ORDER BY : 정렬할 기준 
+		- DESC : 내림차순
+		- ASC : 오름차순
+
+	WHERE : 조건문으로 맞는값 검색
+		- AND, OR 부가 속성 
+
+	LIKE : 부분적으로 일치하는 컬럼 검색
+		- e.g LIKE 'TE%';(TE로시작하는 조건), LIKE '%TE%';(TE가 들어간 조건) , LIKE 'TE__';(TE로 시작하고 2글자가 붙을경우.)
+
+	LIMIT : 결과중 일부만 가져오기 
+		- e.g LIMIT 10;(결과중 처음부터 10개만 가져옴), LIMIT 50, 10;(결과중 50번째부터 10개만 가져옴.)
+
+	조건 조합의 순서
+	SELECT > FROM > WHERE > ORDER BY > LIMIT
+
 	
 	NoSQL : 정해진 스키마가 없음 데이터 구조 변화가 자유롭고 데이터 분산이 용이하지만 
 	데이터 중복이 발생하거나 변경시에 오랜시간이 걸리는 단점이 존재함
