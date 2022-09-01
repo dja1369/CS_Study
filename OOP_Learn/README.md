@@ -8,27 +8,31 @@
     (즉 한 클래스가 두 비즈니스 로직을 담당하고 있다면 두 역활을 담당하고 있다는 말이다.)
     핵심은 한개의 클래스는 한개의 역활만 담당해 변경이 예측될수 있는 범위로 한정 되어야 한다
     한 클래스가 다양하고 막중한 책임을 가져선 안되기에... 
+    
     e.g. 
-    class Service: # 이 코드는 어떨까? 하나의 클래스가 여러 역활을 수행하고 있다
+    class Service:  # 이 코드는 어떨까? 하나의 클래스가 여러 역활을 수행하고 있다
                     # 예를 들어 결제, 항의, 여러기능들..
-        def pay:
+        def pay: # 결제 기능 담당
             pass
-        def blame:
+        def blame: # 불만 기능 담당
             pass
         def ....
+
     위 코드의 문제점은 결제 기능을 수정하고 싶다면 서비스클래스를 수정하고 블레임 기능도 서비스 클래스를 수정해야만 한다. 
-    즉 두가지 역활을 가지고 있는것이다.
+    한마디로 두가지 역활을 가지고 있는것이다 이러한 경우의 문제점은 단순히 결제 기능에 문제가 생겨 pay 메소드를 수정하면 서비스 클래스를 새로 배포해야 한다는것이다 
+    이런 경우 service클래스는 여러 역활을 담당하게 되어 문제가 생긴다.
+
     이를 해결하기 위해선 간단하게 한다면 기능별로 클래스를 만들어 분리하면 된다
     간단하게 표현하자면 (임의 구현이므로 생성자는 제외했음)
     class service(metaclass=ABCMeta):
         @abstractmethod
-        def pay():
+        def pay(): # 결제 기능 담당
             pass
         @abstractmethod
-        def blame():
+        def blame(): # 불만 기능 담당
             pass
         @abstractmethod
-        def somemethod():
+        def somemethod(): # 여러 기능 담당
             pass
     
     class pay(service):
@@ -46,18 +50,9 @@
         def somemethod():
             pass    
         ...
-    def pay_service(entity: pay):
-        entity.pay()
-    def blame_service(entity: blame):
-        entity.blame()
 
-    consumer_pay_service: service = pay()
-    cunsumer_blame_service: service = blame()
-
-    pay_service(entity=consumer_pay_service)
-    blame_service(entity=consumer_blame_service)
-
-    이 예제는 간단하고 여러 문제점이 있지만 본질적인 목표인 역활의 분리는 해냈다 물론 실제 비즈니스 로직은 더 복잡하고 어려울것 이다.
+    이 예제는 간단하고 여러 문제점이 있지만 본질적인 목표인 역활의 분리를 해냈다 필요하다면 이제 객체를 생성해 기능을 호출해 로직을 구성하면 될것이다. 
+    물론 실제 비즈니스 로직은 더 복잡하고 어려울것 이다.
     그럼 자 이제 무엇이 다음 문제일까? 
     단일 책임 원칙은 지켜냈지만 상속 과정중 쓰이지 않는 죽은 코드가 발생했다 이제 이를 해결 하기 위해서 ISP 인터페이스 분리 원칙이 필요하다고 생각한다.
     
