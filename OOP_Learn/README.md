@@ -1,0 +1,69 @@
+# OOP
+##	SOLID 
+###  1. 단일 책임의 원칙 : 하나의 클래스는 하나의 역활만 담당해야 한다 
+    22.09.01
+    SPR를 지키기 위해선 기본적으로 하나의 객체는 하나의 책임만을 가지고 있어야 한다 
+    즉 Service라는 클래스가 A팀의 요청에 대해 변경된다 가정하고 
+    B팀 의 요청에 의해 변경되는 클래스라면 이는 SRP를 위반하고 있을 가능성이 높다 
+    (즉 한 클래스가 두 비즈니스 로직을 담당하고 있다면 두 역활을 담당하고 있다는 말이다.)
+    핵심은 한개의 클래스는 한개의 역활만 담당해 변경이 예측될수 있는 범위로 한정 되어야 한다
+    한 클래스가 다양하고 막중한 책임을 가져선 안되기에... 
+    e.g. 
+    class Service: # 이 코드는 어떨까? 하나의 클래스가 여러 역활을 수행하고 있다
+                    # 예를 들어 결제, 항의, 여러기능들..
+        def pay:
+            pass
+        def blame:
+            pass
+        def ....
+    위 코드의 문제점은 결제 기능을 수정하고 싶다면 서비스클래스를 수정하고 블레임 기능도 서비스 클래스를 수정해야만 한다. 
+    즉 두가지 역활을 가지고 있는것이다.
+    이를 해결하기 위해선 간단하게 한다면 기능별로 클래스를 만들어 분리하면 된다
+    간단하게 표현하자면 (임의 구현이므로 생성자는 제외했음)
+    class service(metaclass=ABCMeta):
+        @abstractmethod
+        def pay():
+            pass
+        @abstractmethod
+        def blame():
+            pass
+        @abstractmethod
+        def somemethod():
+            pass
+    
+    class pay(service):
+        def pay():
+            # logic 
+        def blame():
+            pass
+        def somemethod():
+            pass
+    class blame(service):
+        def pay():
+            pass
+        def blame():
+            # logic
+        def somemethod():
+            pass    
+        ...
+    def pay_service(entity: pay):
+        entity.pay()
+    def blame_service(entity: blame):
+        entity.blame()
+
+    consumer_pay_service: service = pay()
+    cunsumer_blame_service: service = blame()
+
+    pay_service(entity=consumer_pay_service)
+    blame_service(entity=consumer_blame_service)
+
+    이 예제는 간단하고 여러 문제점이 있지만 본질적인 목표인 역활의 분리는 해냈다 물론 실제 비즈니스 로직은 더 복잡하고 어려울것 이다.
+    그럼 자 이제 무엇이 다음 문제일까? 
+    단일 책임 원칙은 지켜냈지만 상속 과정중 쓰이지 않는 죽은 코드가 발생했다 이제 이를 해결 하기 위해서 ISP 인터페이스 분리 원칙이 필요하다고 생각한다.
+    
+		 	
+
+###	2. 개방 폐쇄의 원칙 : 확장(상속)에는 열려있고, 수정에는 닫혀있어야한다
+###	3. 리스코프 치환의 원칙 : 자식 객체는 언제든지 부모 객체로 변환 가능하어야 한다 
+###	4. 인터페이스 분리의 원칙 : 인터페이스는 클래스가 꼭 필요한 기능만 구현되어야 한다
+###	5. 의존성 역전의 원칙 : 상위 모듈은 하위 모듈에 의존하면 안되며 추상화에 의존해야 하고 추상화는 세부    사항에 의존하면 안된다.
