@@ -224,4 +224,4 @@
     추상화 클래스와 관계를 맺고 추상화 타입을 정의하여 의존성을 역전 시킬수 있다
     DIP 미적용 EventStreamer > Syslog "" EventStreamer < Syslog, OtherClient
     DIP 적용 EventStreamer > 추상화 < Syslog, OtherClient
-    그리하여 EventStreamer객체는 추상화 인터페이스와 관계를 가질뿐 실제 구체적인 저수준 로직에 대한 의존성이 사라지게 된다.
+    그리하여 EventStreamer객체는 추상화 인터페이스와 관계를 가질뿐 실제 구체적인 저수준 로직에 대한 의존성이 사라지게 된다...
