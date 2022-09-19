@@ -2,7 +2,7 @@
 
 <hr>
 
-![img.png](img.png) , ![img_1.png](img_1.png)
+<img width="413" alt="스크린샷 2022-09-19 오후 9 12 42" src="https://user-images.githubusercontent.com/62789342/191014687-409855f8-9e1e-48b2-8d66-cec06c6a05ff.png">
 # 1. 현재 상황
     굉장히 많은 메소드가 Main.py에 집중되어 있음 
     이는 초기 아키텍쳐를 구상하지 않고 코드를 작성했기에 발생하였음 
@@ -11,7 +11,7 @@
 # 2. 적용할 아키텍쳐 
 
 
-## A. Layered architecture ![img_2.png](img_2.png) 
+## A. Layered architecture <img width="414" alt="스크린샷 2022-09-19 오후 9 12 52" src="https://user-images.githubusercontent.com/62789342/191014726-dad2cb80-c0b0-4605-bb2d-32b7c724b453.png">
     표현계층(View) = 표현
     비즈니스계층(B,L), 응용계층(application) = 제어
     영속성계층(DAO), 도메인계층(Domain) = 행위
@@ -25,7 +25,8 @@
     
 
 
-## B. Domain Driven Design ![img_3.png](img_3.png) ![img_4.png](img_4.png)
+## B. Domain Driven Design <img width="641" alt="스크린샷 2022-09-19 오후 9 13 05" src="https://user-images.githubusercontent.com/62789342/191014755-82307ab5-d1e3-442b-be90-d4404a92f47b.png"> <img width="644" alt="스크린샷 2022-09-19 오후 9 13 14" src="https://user-images.githubusercontent.com/62789342/191014768-c698213a-a50a-463f-92ff-1630662f5e3a.png">
+
     Domain : 소프르웨어로 해결하고자 하는 대상 
     즉 설계를 해결하고자 하는 대상별로 나누어 구현하는것이며 도메인의 구별 기준은 
     개개인마다 달라질수 있다
@@ -33,7 +34,7 @@
     실제 행위를 통해 도메인이 기능이 나타나도록 설계 해야 한다.
 
 
-## C. hexagonal architecture ![img_5.png](img_5.png) ![img_6.png](img_6.png)
+## C. hexagonal architecture <img width="665" alt="스크린샷 2022-09-19 오후 9 13 26" src="https://user-images.githubusercontent.com/62789342/191014788-a2dc2e92-cc53-4c7d-a569-08b0ce00797d.png"> <img width="700" alt="스크린샷 2022-09-19 오후 9 13 35" src="https://user-images.githubusercontent.com/62789342/191014804-595cf4ff-4c1c-4835-b807-4f7742241fc6.png">
     헥사고날 아키텍처는 내부(도메인)와 외부(인프라)로 구분된다
     내부 영역 : 순수한 비즈니스 로직을 표현하며 캡슐화된 영역 -> 기능적 요구사항에 따라 먼저 설계
     외부 영역 : 내부 영역에서 기술을 분리하여 연결시켜주는 영역(기술 : nginx, DB, Redis...)
@@ -52,7 +53,7 @@
     또한 개별로 하나의 아키텍쳐를 적용하기엔 부족하거나 오버 엔지니어링이라는 의견이 존재하였음 
     그리하여 차후 신규 입사자와 서비스의 확장성를 고려하여 ** Layered architecture in DDD ** 를 차용하기로 결정
 
-## 4. 폴더 구조 ![img_7.png](img_7.png) ![img_1.png](img_1.png)
+## 4. 폴더 구조 <img width="371" alt="스크린샷 2022-09-19 오후 9 13 49" src="https://user-images.githubusercontent.com/62789342/191014836-599babc4-6a34-40d5-b0f3-11fa4b53d035.png">
     우선적으로 Main.py에 존재하는 함수를 파악하여 기능에 따라 Db, Web, View, Control, Compact로 도메인 별로 구분 짓고
     아래의 파일 구조는 추상화 > 구현부 | 라우트(Get, Post)별로 구분 하여 아키텍쳐를 설계함 
 
