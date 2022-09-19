@@ -9,11 +9,13 @@
     이는 초기 아키텍쳐를 구상하지 않고 코드를 작성했기에 발생하였음 
     이후 아키텍쳐에 대한 스터디를 진행하여 이를 적용하고 개선하고자 리팩토링을 논의함
 
-# 2. 적용할 아키텍쳐 
+# 2. 고려할 아키텍쳐 리스트
 
 
 ## A. Layered architecture 
+
 <img width="414" alt="스크린샷 2022-09-19 오후 9 12 52" src="https://user-images.githubusercontent.com/62789342/191014726-dad2cb80-c0b0-4605-bb2d-32b7c724b453.png">
+
     표현계층(View) = 표현
     비즈니스계층(B,L), 응용계층(application) = 제어
     영속성계층(DAO), 도메인계층(Domain) = 행위
@@ -41,6 +43,7 @@
 ## C. hexagonal architecture 
 <img width="665" alt="스크린샷 2022-09-19 오후 9 13 26" src="https://user-images.githubusercontent.com/62789342/191014788-a2dc2e92-cc53-4c7d-a569-08b0ce00797d.png"> 
 <img width="700" alt="스크린샷 2022-09-19 오후 9 13 35" src="https://user-images.githubusercontent.com/62789342/191014804-595cf4ff-4c1c-4835-b807-4f7742241fc6.png">
+
     헥사고날 아키텍처는 내부(도메인)와 외부(인프라)로 구분된다
     내부 영역 : 순수한 비즈니스 로직을 표현하며 캡슐화된 영역 -> 기능적 요구사항에 따라 먼저 설계
     외부 영역 : 내부 영역에서 기술을 분리하여 연결시켜주는 영역(기술 : nginx, DB, Redis...)
@@ -61,6 +64,7 @@
 
 ## 4. 폴더 구조 
 <img width="371" alt="스크린샷 2022-09-19 오후 9 13 49" src="https://user-images.githubusercontent.com/62789342/191014836-599babc4-6a34-40d5-b0f3-11fa4b53d035.png">
+
     우선적으로 Main.py에 존재하는 함수를 파악하여 기능에 따라 Db, Web, View, Control, Compact로 도메인 별로 구분 짓고
     아래의 파일 구조는 추상화 > 구현부 | 라우트(Get, Post)별로 구분 하여 아키텍쳐를 설계함 
 
