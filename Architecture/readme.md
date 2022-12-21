@@ -70,4 +70,118 @@
 
 
     
-    
+# 
+## 22.12.20 
+    현재 개선된 폴더 구조
+    # DeepTap Server
+
+DeepVision -> DDD
+
+Directory Structure → 추후 고도화시 Folder Depth추가 하여 확장
+
+- Server
+    - Route
+        - Sprint
+            - example.py → 데모용 라우터
+        - includeRoute.py → 메인 라우터(Prefix 등록)
+        - mainRoute.py → 유저 라우터
+        - datasetsRoute.py → 데이터셋 라우터
+        - labelingRoute.py → 라벨링 라우터
+        - modelRoute.py → 모델 라우터
+        - projectRoute.py → 프로젝트 라우터
+        - Error
+            - errorAbstract.py → 에러 인터페이스
+            - errorHandler.py → 에러 핸들링
+            - errorDatabaseTemplate.py → 데이터베이스 에러 템플릿
+            - errorAiTemplate.py → 인공지능 에러 템플릿
+            - errorVaildationTemplate.py → 검증 에러 템플릿
+    - DTO
+        - responseForm.py → 반환 폼 생성
+        - Auth
+            - authDTO.py → 인증 검증 폼
+        - Login
+            - loginInValidation.py → pydantic IN(Request) 검증 폼
+            - loginOutValidation.py → pydantic Out(Response) 검증 폼
+        - Datasets
+            - datasetsInValidation.py → pydantic IN 검증 폼
+            - datasetsOutValidation.py → pydantic Out 검증 폼
+        - Labeling
+            - labelingInValidation.py → pydantic IN 검증 폼
+            - labelingOutValidation.py → pydantic Out 검증 폼
+        - Model
+            - modelInValidation.py → pydantic IN 검증 폼
+            - modelOutValidation.py → pydantic Out 검증 폼
+    - Service
+        - Auth
+            - Service
+                - authService.py → 검증 비즈니스 로직
+                - authServiceAbstract.py → 검증 인터페이스
+        - Login
+            - Handler
+                - loginHandler.py → 로그인 핸들러(서비스 통합 모듈)
+                - loginHandlerAbstract.py → 로그인 핸들러 인터페이스
+            - Repository
+                - loginRepository.py → 로그인 DAO(DB 접근 레이어)
+                - loginRepositoryAbstract.py → 로그인 DAO 인터페이스
+            - Service
+                - loginService.py → 로그인 비즈니스 로직
+                - loginServiceAbstract.py → 로그인 인터페이스
+        - Datasets
+            - Handler
+                - datasetsHandler.py → 데이터셋 핸들러(서비스 통합 모듈)
+                - datasetsHandlerAbstract.py → 데이터셋 핸들러 인터페이스
+            - Repository
+                - datasetsRepository.py → 데이터셋 DAO(DB 접근 레이어)
+                - datasetsRepositoryAbstract.py → 데이터셋 DAO 인터페이스
+            - Service
+                - datasetsService.py → 데이터셋 비즈니스 로직
+                - datasetsServiceAbstract.py → 데이터셋 인터페이스
+        - Labeling
+            - Handler
+                - labelingHandler.py → 라벨링 핸들러(서비스 통합 모듈)
+                - labelingHandlerAbstract.py → 라벨링 핸들러 인터페이스
+            - Repository
+                - labelingRepository.py → 라벨링 DAO(DB 접근 레이어)
+                - labelingRepositoryAbstract.py → 라벨링 DAO 인터페이스
+            - Service
+                - labelingService.py → 라벨링 비즈니스 로직
+                - labelingServiceAbstract.py → 라벨링 인터페이스
+        - Model
+            - Handler
+                - modelHandler.py → 모델 핸들러(서비스 통합 모듈)
+                - modelHandlerAbstract.py → 모델 핸들러 인터페이스
+            - Repository
+                - modelRepository.py → 모델 DAO(DB 접근 레이어)
+                - modelRepositoryAbstract.py → 모델 DAO 인터페이스
+            - Service
+                - modelService.py → 모델 비즈니스 로직
+                - modelServiceAbstract.py → 모델 인터페이스
+    - AIModel (Git SubModule)
+        - aimodelAbstract.py → 인공지능 인터페이스
+            - ClusterModel → 클러스터 모델
+            - SegModel → 세그먼테이션 모델
+    - Infra
+        - DBModel
+        - dbAbstract.py → DB인터페이스
+            - ORM
+                - sqlalchemyModule.py → (구현)인터페이스 구현부
+                - schemas.py → 테이블 스키마 매핑
+            - SQL
+                - pymysqlModule.py → (속도) 인터페이스 구현부
+    - Core
+        - config.py → 설정값 취합 해서 init
+            - App
+                - appConfig.py → 서버 관련 설정값
+            - Constants
+                - constantsConfig.py → 상수 관련 설정값
+            - DB
+                - dbConfig.py → DB 관련 설정값
+            - ErrorCase
+                - …
+            - config.py → 설정값 생성
+            - configType.py → 설정값 타입 인터페이스
+    - Test
+        - test_module → 모듈 단위 테스트
+        - test_routes → E2E 테스트
+        
+    - main.py > Server, DB, Service 구동
